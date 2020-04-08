@@ -1,0 +1,31 @@
+<article class="post">
+  <h1>{{ post.title }}</h1>
+  <address>Posted by {{post.poster.name}}</address>
+  <p>{{ post.body }}</p>
+
+  {{#if post.tags.length}}
+    <h3>Tags</h3>
+    <ul>
+      {{#each post.tags}}
+        <li><a href="/posts/tag/{{this}}">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  {{#if post.replies.length}}
+    <h3>Replies</h3>
+    <ul>
+      {{#each post.replies}}
+        <li><a href="/posts/replies/{{this}}">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  {{#if post.images.length}}
+    <h3>Images</h3>
+    <ul>
+      {{#each post.images}}
+        <li><a href="/posts/images/{{this}}">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  <a href="/posts">Back to All Posts</a>
+</article>
