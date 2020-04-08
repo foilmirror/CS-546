@@ -29,18 +29,48 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  if (!userInfo.firstName) {
-    res.status(400).json({error: 'You must provide a first name'});
+  if (!userInfo.userName) {
+    res.status(400).json({error: 'You must provide a user name'});
     return;
   }
 
-  if (!userInfo.lastName) {
-    res.status(400).json({error: 'You must provide a last name'});
+  if (!userInfo.Email) {
+    res.status(400).json({error: 'You must provide a Email'});
+    return;
+  }
+
+  if (!userInfo.Gender) {
+    res.status(400).json({error: 'You must provide a Gender'});
+    return;
+  }
+
+  if (!userInfo.City) {
+    res.status(400).json({error: 'You must provide a City'});
+    return;
+  }
+
+  if (!userInfo.State) {
+    res.status(400).json({error: 'You must provide a State'});
+    return;
+  }
+
+  if (!userInfo.Age) {
+    res.status(400).json({error: 'You must provide a Age'});
+    return;
+  }
+
+  if (!userInfo.Password) {
+    res.status(400).json({error: 'You must provide a Password'});
+    return;
+  }
+
+  if (!userInfo.profilePhoto) {
+    res.status(400).json({error: 'You must provide a profilePhoto'});
     return;
   }
 
   try {
-    const newUser = await userData.addUser(userInfo.firstName, userInfo.lastName);
+    const newUser = await userData.addUser(userName,Email,profilePhoto,Gender,City,State,Age,Password);
     res.json(newUser);
   } catch (e) {
     res.sendStatus(500);
