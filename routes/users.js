@@ -81,19 +81,50 @@ router.put('/:id', async (req, res) => {
   let userInfo = req.body;
 
   if (!userInfo) {
-    res.status(400).json({error: 'You must provide data to update a user'});
+    res.status(400).json({error: 'You must provide data to create a user'});
     return;
   }
 
-  if (!userInfo.firstName) {
-    res.status(400).json({error: 'You must provide a first name'});
+  if (!userInfo.userName) {
+    res.status(400).json({error: 'You must provide a user name'});
     return;
   }
 
-  if (!userInfo.lastName) {
-    res.status(400).json({error: 'You must provide a last name'});
+  if (!userInfo.Email) {
+    res.status(400).json({error: 'You must provide a Email'});
     return;
   }
+
+  if (!userInfo.Gender) {
+    res.status(400).json({error: 'You must provide a Gender'});
+    return;
+  }
+
+  if (!userInfo.City) {
+    res.status(400).json({error: 'You must provide a City'});
+    return;
+  }
+
+  if (!userInfo.State) {
+    res.status(400).json({error: 'You must provide a State'});
+    return;
+  }
+
+  if (!userInfo.Age) {
+    res.status(400).json({error: 'You must provide a Age'});
+    return;
+  }
+
+  if (!userInfo.Password) {
+    res.status(400).json({error: 'You must provide a Password'});
+    return;
+  }
+
+  if (!userInfo.profilePhoto) {
+    res.status(400).json({error: 'You must provide a profilePhoto'});
+    return;
+  }
+
 
   try {
     await userData.getUserById(req.params.id);
