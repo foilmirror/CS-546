@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>The Best Bulletin Board Website in the World!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/public/search.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <h2>Search</h2>
+        </header>
+
+        <form method ="POST" action="/result" id="myForm">
+            <label>
+                Contains keyword:
+                <input type = "text" placeholder="Type something" name="text"/>
+            </label>
+
+            <label>
+                Author name:
+                <input type = "text" placeholder="Type something" name="author"/>
+            </label>
+
+            <button type="submit">Search</button>
+        </form>
+    </main>
+
+    <nav>
+        <ul>
+            <li><a href="../">Go back</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>
