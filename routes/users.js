@@ -96,27 +96,27 @@ router.put('/:id', async (req, res) => {
   }
 
   if (!userInfo.Gender) {
-    res.status(400).json({error: 'You must provide a Gender'});
+    res.status(400).json({error: 'You must provide a gender'});
     return;
   }
 
   if (!userInfo.City) {
-    res.status(400).json({error: 'You must provide a City'});
+    res.status(400).json({error: 'You must provide a city'});
     return;
   }
 
   if (!userInfo.State) {
-    res.status(400).json({error: 'You must provide a State'});
+    res.status(400).json({error: 'You must provide a state'});
     return;
   }
 
   if (!userInfo.Age) {
-    res.status(400).json({error: 'You must provide a Age'});
+    res.status(400).json({error: 'You must provide a age'});
     return;
   }
 
   if (!userInfo.Password) {
-    res.status(400).json({error: 'You must provide a Password'});
+    res.status(400).json({error: 'You must provide a password'});
     return;
   }
 
