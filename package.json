@@ -18,6 +18,9 @@
   "homepage": "https://github.com/foilmirror/CS-546#readme",
   "dependencies": {
     "mongodb": "^3.5.5",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "handlebars": "^4.7.6"
   }
 }
