@@ -25,9 +25,6 @@ let exportedMethods = {
 
   async addUser(userName,Email,profilePhoto,Gender,City,State,Age,Password) {
     const userCollection = await users();
-    if(!profilePhoto){
-        profilePhoto = "";
-    }
 
     let newUser = {
       userName: userName,
@@ -38,9 +35,7 @@ let exportedMethods = {
       State: State,
       Age: Age,
       Password: Password,
-      _id: uuid(),
-      posts: [],
-      friends: []
+      _id: uuid()
 
     };
 
@@ -74,7 +69,7 @@ let exportedMethods = {
 
     const user = await this.getUserById(id);
 
-    console.log(user);
+    
 
 
 
@@ -155,19 +150,17 @@ let exportedMethods = {
 
   async addFriendtoUser(userId, friendID){
     let currentUser = await this.getUserById(userId);
-
+    console.log(currentUser)
     const userCollection = await users();
-
     const updateInfo = await userCollection.updateOne(
 
       {_id: userId},
-
+    
       {$addToSet: {friends: {id: friendID}}}
 
     );
 
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Update failed';
-
     return await this.getUserById(userId);
 
   },

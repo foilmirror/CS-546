@@ -1,0 +1,9 @@
+<section>
+  <h1>Users</h1>
+  {{#each users}}  
+    <article class="user">
+      <h2><a href="/users/{{_id}}">{{userName}}</a></h2>
+      <p>{{body}}</p>
+    </article>
+  {{/each}}
+</section>

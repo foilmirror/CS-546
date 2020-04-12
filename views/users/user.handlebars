@@ -1,0 +1,16 @@
+<article class="user">
+<h1>{{user.userName}}'s Page</h1>
+  <h2>{{ user.profilePhoto }}</h2>
+  <h2>Gender: {{user.Gender}}</h2>
+  <h2>Location: {{user.City}}, {{user.State}}</h2>
+
+  <h2>Posts done by {{user.userName}}</h2>
+  {{#each user.posts}}
+    <li><a href="/posts/{{this}}">{{this}}</a></li>
+     {{/each}}
+    <h1>Friends of {{user.userName}}</h1>
+    {{#each users.friends}}
+    <li><a href="/users/{{this}}">{{this}}</a></li>
+     {{/each}}
+  <a href="/users">Back to All Users</a>
+</article>

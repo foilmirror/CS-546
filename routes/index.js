@@ -5,9 +5,7 @@ const userRoutes = require('./users');
 const path = require('path');
 
 const constructorMethod = (app) => {
-    app.use('/', mainRoutes);
     app.use('/post', postRoutes);
-	app.use('/search', searchRoutes);
 	app.use('/users', userRoutes);
 	app.get('/about', (req, res) => {
 		res.sendFile(path.resolve('static/about.html'));
