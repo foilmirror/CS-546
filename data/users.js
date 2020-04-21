@@ -23,6 +23,14 @@ let exportedMethods = {
     return user;
   },
 
+  async getUserByName(username) {
+    const userCollection = await users();
+    console.log("HI!");
+    const user = await userCollection.findOne({userName: username});
+    if (!user) throw 'User not found';
+    return user;
+  },
+
   async addUser(userName,Email,profilePhoto,Gender,City,State,Age,Password) {
     const userCollection = await users();
 
@@ -150,7 +158,7 @@ let exportedMethods = {
 
   async addFriendtoUser(userId, friendID){
     let currentUser = await this.getUserById(userId);
-    console.log(currentUser)
+    console.log(currentUser);
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne(
 

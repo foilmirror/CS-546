@@ -1,0 +1,15 @@
+{{#if error}}
+<p> {{etext}} </p>
+{{/if}}
+
+<form id = login-form action = "/users/login" method = "post">
+<label> Username
+    <input type="text" name="username" id="username">
+</label>
+
+<label> Password
+    <input type="text" name="password" id="password">
+</label>
+<button type="submit">Login</button>
+
+</form>

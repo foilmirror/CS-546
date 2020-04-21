@@ -1,9 +1,8 @@
 <article class="user">
 <h1>{{user.userName}}'s Page</h1>
-  <h2>{{ user.profilePhoto }}</h2>
+  <h2><img src="/public/images/{{ user.profilePhoto }}.png" alt="The User's Pitcure"></h2>
   <h2>Gender: {{user.Gender}}</h2>
   <h2>Location: {{user.City}}, {{user.State}}</h2>
-
   <h2>Posts done by {{user.userName}}</h2>
   {{#each user.posts}}
     <li><a href="/posts/{{this}}">{{this}}</a></li>
@@ -12,5 +11,9 @@
     {{#each users.friends}}
     <li><a href="/users/{{this}}">{{this}}</a></li>
      {{/each}}
+  {{#if nyou}}
+  <form id = add-friend action = "/users/:id" method = "put"></form>
+  <button>add this user</button>
+  {{/if}}
   <a href="/users">Back to All Users</a>
 </article>

@@ -2,14 +2,29 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const userData = data.users;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.get('/new', async (req, res) => {
 	res.render('users/register', {});
 });
 
+router.get("/login", (req, res) => {
+  if (req.session.user) {
+      return res.redirect(':/users/id');
+  }
+  else{
+      res.render('users/login',{title: 'Login'});
+  }
+
+});
+
 router.get('/:id', async (req, res) => {
   try {
     let c_user = await userData.getUserById(req.params.id);
+    if(req.session.user){
+      res.render('users/user', {user: c_user,nyou:true});
+    }
     res.render('users/user', {user: c_user});
   } catch (e) {
     res.status(404).json({error: 'User not found'});
@@ -27,7 +42,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   let userInfo = req.body;
-  console.log(userInfo)
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user'});
     return;
@@ -74,7 +88,8 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const newUser = await userData.addUser(userInfo.userName,userInfo.Email,userInfo.profilePhoto,userInfo.Gender,userInfo.City,userInfo.State,userInfo.Age,userInfo.Password);
+    const h = await bcrypt.hash(userInfo.Password,saltRounds);
+    const newUser = await userData.addUser(userInfo.userName,userInfo.Email,userInfo.profilePhoto,userInfo.Gender,userInfo.City,userInfo.State,userInfo.Age,h);
     res.render('users/user', {user: newUser});
   } catch (e) {
     res.sendStatus(500);
@@ -83,7 +98,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   let userInfo = req.body;
-
+  console.log(req.params.id);
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user'});
     return;
@@ -174,5 +189,44 @@ router.delete('/:id', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+
+router.post("/login", async (req, res) => {
+  const data = req.body;
+  if(!data || !data.username || !data.password){
+      res.status(400);
+      return;
+  }
+  
+  data.username = data.username.toLowerCase();
+  try{
+      let success = false;
+      const users  = await userData.getAllUsers();
+      let user = users.find(u => u.userName.toLowerCase() == data.username);
+      if(user){
+          success = await bcrypt.compare(data.password, user.Password);
+  
+          if(success=== true){
+              //Worked~
+              req.session.user = user;
+              req.session.AuthCookie = req.sessionID;
+              return res.redirect('/users');
+          }
+          else{
+              res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });
+              console.log("You messed up bro");
+          }
+      }
+      else{
+          res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid username" });
+          console.log("You messed up bro");
+      }
+  }
+  catch{
+      res.status(404).json({ error: true });
+  }
+});
+
+
 
 module.exports = router;

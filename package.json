@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/foilmirror/CS-546#readme",
   "dependencies": {
-    "mongodb": "^3.5.5",
-    "uuid": "^7.0.3",
+    "bcrypt": "^4.0.1",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.3",
-    "handlebars": "^4.7.6"
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "mongodb": "^3.5.5",
+    "uuid": "^7.0.3"
   }
 }

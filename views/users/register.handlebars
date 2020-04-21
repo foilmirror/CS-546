@@ -14,7 +14,11 @@
 
     <label>
       Profile Photo
-      <input type="file" id="profilePhoto" name= "profilePhoto" accept="image/*" value="{{user.profilePhoto}}">
+      <select id = "profilePhoto" name="profilePhoto">
+	<option style="background-image:url(/public/images/male.png);"> male</option>
+	<option style="background-image:url(/public/images/female.png);">female</option>
+	<option style="background-image:url(publie/images/clown.png);">clown</option>
+	</select> 
     </label>
 
     <label>
@@ -23,6 +27,7 @@
         <option value="Male">Male</option>
 	    <option value="Female">Female</option>
 	    <option value="Other">Other</option>
+    </select>
     </label>
 
 
