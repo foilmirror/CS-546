@@ -29,6 +29,7 @@ app.use(session({
     saveUninitialized: true
   }))
 
+ 
 configRoutes(app);
 
 app.listen(3000, () => {

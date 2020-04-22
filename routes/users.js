@@ -22,10 +22,13 @@ router.get("/login", (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     let c_user = await userData.getUserById(req.params.id);
+    let match = false;
     if(req.session.user){
-      res.render('users/user', {user: c_user,nyou:true});
+      if(req.session.user._id != c_user._id){
+     match = true;
+      }
     }
-    res.render('users/user', {user: c_user});
+    res.render('users/user', {user: c_user, nyou: match});
   } catch (e) {
     res.status(404).json({error: 'User not found'});
   }
@@ -208,6 +211,7 @@ router.post("/login", async (req, res) => {
   
           if(success=== true){
               //Worked~
+
               req.session.user = user;
               req.session.AuthCookie = req.sessionID;
               return res.redirect('/users');
