@@ -22,13 +22,29 @@ router.get("/login", (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     let c_user = await userData.getUserById(req.params.id);
-    let match = false;
+    let diff = false;
+    let f = false;
+    let you = false;
     if(req.session.user){
       if(req.session.user._id != c_user._id){
-     match = true;
+          diff = true;
+      }
+
+      else{
+          you = true;
+      }
+      if(c_user.friends){
+      for(let x = 0 ; x < c_user.friends.length; x++){
+        if(req.session.user._id == c_user.friends[x].id){
+          f = true;
+          diff = false;
+          break;
+        }
+
       }
     }
-    res.render('users/user', {user: c_user, nyou: match});
+  }
+    res.render('users/user', {user: c_user, nyou: diff, i: req.session.user, friend: f, you:you});
   } catch (e) {
     res.status(404).json({error: 'User not found'});
   }
@@ -101,7 +117,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   let userInfo = req.body;
-  console.log(req.params.id);
+  console.log(req.params);
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user'});
     return;
@@ -157,12 +173,12 @@ router.put('/:id', async (req, res) => {
   try {
     //If the updated thing was supposed to be friends, it will be here (happens when a person adds someone as a friend)
     if(userInfo.friends){
-      await userData.addFriendtoUser(req.params.id,userInfo.friends)
-      const updatedUser = await userData.updateUser(req.params.id, userInfo);
-      res.json(updatedUser);
+      await userData.addFriendtoUser(req.params.id,userInfo.friends);
+      await userData.updateUser(req.params.id, userInfo);
+      res.redirect('/users/' + req.params.id)
     }
     const updatedUser = await userData.updateUser(req.params.id, userInfo);
-    res.json(updatedUser);
+    res.redirect('/users/' + req.params.id)
   } catch (e) {
     res.sendStatus(500);
   }
@@ -180,13 +196,15 @@ router.delete('/:id', async (req, res) => {
     //This will handle deleting users from friend lists (when a button is pressed on the actual site)
     //This is because removing friends is a user to user thing so idk where else this would go lol
     if(req.body.userID){
-      await userData.removeFriend(req.params.id,req.body.userID)
-      res.sendStatus(200);
+      await userData.removeFriend(req.params.id,req.body.userID);
+      res.redirect('/users/' + req.params.id);
+  
     }
     //A normal delete request will have no body
     else{
     await userData.removeUser(req.params.id);
-    res.sendStatus(200);
+    res.redirect('/users/');
+
     }
   } catch (e) {
     res.sendStatus(500);
@@ -211,10 +229,9 @@ router.post("/login", async (req, res) => {
   
           if(success=== true){
               //Worked~
-
               req.session.user = user;
               req.session.AuthCookie = req.sessionID;
-              return res.redirect('/users');
+              return res.redirect('/users/');
           }
           else{
               res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });

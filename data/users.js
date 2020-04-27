@@ -1,7 +1,8 @@
 const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 const uuid = require('uuid/v4');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 let exportedMethods = {
@@ -77,9 +78,6 @@ let exportedMethods = {
 
     const user = await this.getUserById(id);
 
-    
-
-
 
     let userUpdateInfo = {
 
@@ -90,7 +88,7 @@ let exportedMethods = {
         City: updatedUser.City,
         State: updatedUser.State,
         Age: updatedUser.Age,
-        Password: updatedUser.Password
+        Password: await bcrypt.hash(updatedUser.Password,saltRounds)
 
     };
 
@@ -140,10 +138,6 @@ let exportedMethods = {
 
     let currentUser = await this.getUserById(userId);
 
-    console.log(currentUser);
-
-
-
     const userCollection = await users();
 
     const updateInfo = await userCollection.updateOne({_id: userId}, {$pull: {posts: {id: postId}}});
@@ -158,7 +152,6 @@ let exportedMethods = {
 
   async addFriendtoUser(userId, friendID){
     let currentUser = await this.getUserById(userId);
-    console.log(currentUser);
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne(
 
@@ -175,7 +168,6 @@ let exportedMethods = {
 
   async removeFriend(userId, friendID){
     let currentUser = await this.getUserById(userId);
-    console.log(currentUser);
 
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne({_id: userId}, {$pull: {friends: {id: friendID}}});
