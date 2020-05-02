@@ -5,15 +5,17 @@
       Post Title
       <input type="text" name="title" placeholder="Post Title" value="{{post.title}}" class="full-width-input"/>
     </label>
+    <br>
     <label for="post-body">
       Post Body
     </label>
     <textarea id="post-body" name="body" rows="4" placeholder="Post Content" class="full-width-input">{{post.body}}</textarea>
-
+    <br>
     <label for="post-tag">
       Post Tag
     </label>
     <textarea id="post-tag" name="tag" rows="4" placeholder="Post Tag" class="full-width-input">{{post.tag}}</textarea>
+    <br>
 
 
     <label for="poster">
@@ -25,7 +27,7 @@
         <option value="{{_id}}">{{userName}}</option>
       {{/each}}
     </select>
-        
+    <br>    
     <button type="submit">Create New Post</button>
 
   </form>
