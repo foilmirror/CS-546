@@ -35,7 +35,7 @@
   {{#if friend}}
    <form action="/users/{{user._id}}?_method=DELETE" method="post">
   <input type="hidden" name="_method" value="DELETE">
-  <p> This will be a button to delete them as a friend</p>
+  <p> Click the button below to unfollow this person</p>
   <input type = "text" name = "userID" value = {{i._id}} readonly/>
   <button type="submit">Remove</button>
    {{/if}}
