@@ -1,16 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href="../public/css/user.css">
 {{#if error}}
 <p> {{etext}} </p>
 {{/if}}
 
+
 <form id = login-form action = "/users/login" method = "post">
 <label> Username
-    <input type="text" name="username" id="username">
+    <input type="text" name="userName" id="userName">
 </label>
 <br>
 <label> Password
-    <input type="text" name="password" id="password">
+    <input type="password" class = "Password" name="password" id="password">
 </label>
 <br>
 <button type="submit">Login</button>
 
 </form>
+</html>

@@ -70,6 +70,15 @@ router.post('/', async (req, res) => {
     res.status(400).json({error: 'You must provide a user name'});
     return;
   }
+  userInfo.userName = userInfo.userName.toLowerCase();
+  const users  = await userData.getAllUsers();
+
+  let f = users.find(u => u.userName.toLowerCase() == userInfo.userName);
+
+  if(f){
+    res.render('users/register', {error: true, etext: "Username is already taken"});
+    return;
+  }
 
   if (!userInfo.Email) {
     res.status(400).json({error: 'You must provide a Email'});
@@ -109,15 +118,15 @@ router.post('/', async (req, res) => {
   try {
     const h = await bcrypt.hash(userInfo.Password,saltRounds);
     const newUser = await userData.addUser(userInfo.userName,userInfo.Email,userInfo.profilePhoto,userInfo.Gender,userInfo.City,userInfo.State,userInfo.Age,h);
-    res.render('users/user', {user: newUser});
+    res.render('users/login', {});
   } catch (e) {
     res.sendStatus(500);
   }
 });
 
 router.put('/:id', async (req, res) => {
+  
   let userInfo = req.body;
-  console.log(req.params);
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user'});
     return;
@@ -214,16 +223,16 @@ router.delete('/:id', async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const data = req.body;
-  if(!data || !data.username || !data.password){
+  if(!data || !data.userName || !data.password){
       res.status(400);
       return;
   }
   
-  data.username = data.username.toLowerCase();
+  data.userName = data.userName.toLowerCase();
   try{
       let success = false;
       const users  = await userData.getAllUsers();
-      let user = users.find(u => u.userName.toLowerCase() == data.username);
+      let user = users.find(u => u.userName.toLowerCase() == data.userName);
       if(user){
           success = await bcrypt.compare(data.password, user.Password);
   

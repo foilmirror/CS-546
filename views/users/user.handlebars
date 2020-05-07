@@ -1,14 +1,17 @@
-<article class="user">
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href="../public/css/user.css">
 <h1>{{user.userName}}'s Page</h1>
-  <h2><img src="/public/images/{{ user.profilePhoto }}.png" alt="The User's Pitcure"></h2>
-  <p>{{user.profilePhoto}}</p>
+  <h2><img src="/public/images/{{ user.profilePhoto }}.jpg" class = "picture" alt="The User's Pitcure"></h2>
+  <h2>Age: {{user.Age}}</h2>
   <h2>Gender: {{user.Gender}}</h2>
   <h2>Location: {{user.City}}, {{user.State}}</h2>
-  <h2>Posts done by {{user.userName}}</h2>
+  <h2 class = "posts">Posts done by {{user.userName}}</h2>
   {{#each user.posts}}
     <li><a href="/posts/{{this}}">{{this}}</a></li>
      {{/each}}
-    <h1>Friends of {{user.userName}}</h1>
+    <h2>Followers of {{user.userName}}</h2>
     {{#each user.friends}}
     <li><a href="/users/{{id}}">{{id}}</a></li>
      {{/each}}
@@ -17,7 +20,7 @@
   <form action="/users/{{user._id}}?_method=PUT" method="post">
   <input type="hidden" name="_method" value="PUT">
   <input type="hidden" id="userName" name="userName" value= {{user.userName}} readonly><br><br>
-  <input type="hidden" id="profilePhoto" name="profilePhoto" value= {{user.profilePhoto}} readonly><br><br>
+  <input type="hidden" id="profilePhoto" class = "picture" name="profilePhoto" value= {{user.profilePhoto}} readonly><br><br>
   <input type="hidden" id="Email" name="Email" value= {{user.Email}} readonly><br><br>
   <input type="hidden" id="Gender" name="Gender" value= {{user.Gender}} readonly><br><br>
   <input type="hidden" id="City" name="City" value= {{user.City}} readonly><br><br>
@@ -58,9 +61,9 @@
     <label>
       Profile Photo
       <select id = "profilePhoto" name="profilePhoto">
-	<option style="background-image:url(/public/images/male.png);"> male</option>
-	<option style="background-image:url(/public/images/female.png);">female</option>
-	<option style="background-image:url(publie/images/clown.png);">clown</option>
+	<option style="background-image:url(/public/images/dog.jpg);" class = "profile"> dog</option>
+	<option style="background-image:url(/public/images/cat.jpg);" class = "profile"> cat</option>
+	<option style="background-image:url(publie/images/flower.jpg);" class = "profile" >flower</option>
 	</select> 
     </label>
    <br>
@@ -143,13 +146,14 @@
     <br>
     <label>
       Age
-      <input type="text" name="Age" placeholder="Age" value = "{{user.Age}}" class="full-width-input"/>
+      <input type="number" name="Age" placeholder="Age" value = "{{user.Age}}" class="full-width-input"/>
     </label>
  <br>
     <br>
+    <p> Please enter your password or enter a new one to confirm all changes</p>
     <label>
       Password
-      <input type="text" name="Password" placeholder="Password" value = "{{user.Password}}" class="full-width-input"/>
+      <input type="password" name="Password" placeholder="Password" value = "" class="full-width-input"/>
     </label>
  <br>
     <button type="submit">Update Info</button>
@@ -163,4 +167,5 @@
   <button type="submit">Delete account</button>
     {{/if}}
   <a href="/users/">Back to All Users</a>
-</article>
+
+</html>

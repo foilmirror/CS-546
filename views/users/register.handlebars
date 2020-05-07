@@ -1,4 +1,10 @@
-<article class="new-user">
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href="../public/css/user.css">
+{{#if error}}
+<p> {{etext}} </p>
+{{/if}}
   <h1>Register</h1>
   <form action="/users" method="POST" class="new-user-form">
 
@@ -17,9 +23,9 @@
     <label>
       Profile Photo
       <select id = "profilePhoto" name="profilePhoto">
-	<option style="background-image:url(/public/images/male.png);"> male</option>
-	<option style="background-image:url(/public/images/female.png);">female</option>
-	<option style="background-image:url(publie/images/clown.png);">clown</option>
+	<option style="background-image:url(/public/images/dog.jpg);" class = "profile"> dog</option>
+	<option style="background-image:url(/public/images/cat.jpg);" class = "profile"> cat</option>
+	<option style="background-image:url(publie/images/flower.jpg);" class = "profile" >flower</option>
 	</select> 
     </label>
 	<br>
@@ -101,13 +107,13 @@
 
     <label>
       Age
-      <input type="text" name="Age" placeholder="Age" value = "{{user.Age}}" class="full-width-input"/>
+      <input type="number" name="Age" placeholder="Age" value = "{{user.Age}}" class="full-width-input"/>
     </label>
 	<br>
 
     <label>
       Password
-      <input type="text" name="Password" placeholder="Password" value = "{{user.Password}}" class="full-width-input"/>
+      <input type="password" name="Password" class = "Password" placeholder="Password" value = "{{user.Password}}" class="full-width-input"/>
     </label>
 	<br>
 
@@ -124,4 +130,5 @@
   </ul>
   {{/if}}
 
-</article>
+
+</html>
