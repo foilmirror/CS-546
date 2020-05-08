@@ -77,7 +77,16 @@ let exportedMethods = {
   async updateUser(id, updatedUser) {
 
     const user = await this.getUserById(id);
+    let test = await bcrypt.compare(updatedUser.Password,user.Password);
+  
+    let pas = updatedUser.Password;
 
+    if(test || updatedUser.Password == user.Password){
+      pas = updatedUser.Password;
+    }
+    else{
+      pas = await bcrypt.hash(updatedUser.Password,saltRounds);
+    }
 
     let userUpdateInfo = {
 
@@ -88,7 +97,7 @@ let exportedMethods = {
         City: updatedUser.City,
         State: updatedUser.State,
         Age: updatedUser.Age,
-        Password: await bcrypt.hash(updatedUser.Password,saltRounds)
+        Password: pas
 
     };
 

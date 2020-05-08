@@ -11,7 +11,7 @@
   {{#each user.posts}}
     <li><a href="/posts/{{this}}">{{this}}</a></li>
      {{/each}}
-    <h2>Followers of {{user.userName}}</h2>
+    <h2>Friends of {{user.userName}}</h2>
     {{#each user.friends}}
     <li><a href="/users/{{id}}">{{id}}</a></li>
      {{/each}}
@@ -27,7 +27,7 @@
   <input type="hidden" id="State" name="State" value= {{user.State}} readonly><br><br>
   <input type="hidden" id="Password" name="Password" value= {{user.Password}} readonly><br><br>
   <input type="hidden" id="Age" name="Age" value= {{user.Age}} readonly><br><br>
-  <input type = "text" name = "friends" value = {{i._id}} readonly/>
+  <input type = "hidden" name = "friends" value = {{i._id}} readonly/>
   <button type="submit">Add</button>
   </form>
   {{/if}}
@@ -35,7 +35,7 @@
   {{#if friend}}
    <form action="/users/{{user._id}}?_method=DELETE" method="post">
   <input type="hidden" name="_method" value="DELETE">
-  <p> Click the button below to unfollow this person</p>
+  <p> Click the button below to unfriend this person</p>
   <input type = "text" name = "userID" value = {{i._id}} readonly/>
   <button type="submit">Remove</button>
    {{/if}}
@@ -165,6 +165,7 @@
    <form action="/users/{{user._id}}?_method=DELETE" method="post">
   <input type="hidden" name="_method" value="DELETE">
   <button type="submit">Delete account</button>
+  <br>
     {{/if}}
   <a href="/users/">Back to All Users</a>
 

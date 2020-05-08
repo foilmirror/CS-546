@@ -19,6 +19,17 @@ router.get("/login", (req, res) => {
 
 });
 
+router.get("/logout", async (req, res) => {
+  if(req.session.user){
+  //Get rid of all cookies
+  req.session.destroy();
+  res.render('users/login',{title: 'Login'});
+  }
+  else{
+       res.redirect('/');
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     let c_user = await userData.getUserById(req.params.id);
@@ -73,15 +84,23 @@ router.post('/', async (req, res) => {
   userInfo.userName = userInfo.userName.toLowerCase();
   const users  = await userData.getAllUsers();
 
-  let f = users.find(u => u.userName.toLowerCase() == userInfo.userName);
+  let e = users.find(u => u.userName.toLowerCase() == userInfo.userName);
 
-  if(f){
+  if(e){
     res.render('users/register', {error: true, etext: "Username is already taken"});
     return;
   }
 
   if (!userInfo.Email) {
     res.status(400).json({error: 'You must provide a Email'});
+    return;
+  }
+
+  userInfo.Email = userInfo.Email.toLowerCase();
+  let f = users.find(u => u.Email.toLowerCase() == userInfo.Email);
+
+  if(f){
+    res.render('users/register', {error: true, etext: "Email is already associated with an account"});
     return;
   }
 
@@ -181,7 +200,9 @@ router.put('/:id', async (req, res) => {
   }
   try {
     //If the updated thing was supposed to be friends, it will be here (happens when a person adds someone as a friend)
-    if(userInfo.friends){
+    if(userInfo.friends && req.session.user){
+      await userData.addFriendtoUser(req.session.user._id,req.params.id);
+      await userData.updateUser(req.session.user._id, req.session.user);
       await userData.addFriendtoUser(req.params.id,userInfo.friends);
       await userData.updateUser(req.params.id, userInfo);
       res.redirect('/users/' + req.params.id)
@@ -206,6 +227,7 @@ router.delete('/:id', async (req, res) => {
     //This is because removing friends is a user to user thing so idk where else this would go lol
     if(req.body.userID){
       await userData.removeFriend(req.params.id,req.body.userID);
+      await userData.removeFriend(req.session.user._id,req.params.id);
       res.redirect('/users/' + req.params.id);
   
     }
@@ -255,7 +277,10 @@ router.post("/login", async (req, res) => {
   catch{
       res.status(404).json({ error: true });
   }
-});
+
+}
+
+);
 
 
 
