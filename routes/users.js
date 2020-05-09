@@ -36,6 +36,14 @@ router.get('/:id', async (req, res) => {
     let diff = false;
     let f = false;
     let you = false;
+    let friends = [];
+    if(c_user.friends){
+    for(let j = 0 ; j < c_user.friends.length; j++){
+      let fr = await userData.getUserById(c_user.friends[j].id);
+      friends.push(fr);
+    }
+    c_user.friends = friends;
+  }
     if(req.session.user){
       if(req.session.user._id != c_user._id){
           diff = true;

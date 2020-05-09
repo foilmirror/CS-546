@@ -26,7 +26,6 @@ let exportedMethods = {
 
   async getUserByName(username) {
     const userCollection = await users();
-    console.log("HI!");
     const user = await userCollection.findOne({userName: username});
     if (!user) throw 'User not found';
     return user;
@@ -77,11 +76,9 @@ let exportedMethods = {
   async updateUser(id, updatedUser) {
 
     const user = await this.getUserById(id);
-    let test = await bcrypt.compare(updatedUser.Password,user.Password);
-  
     let pas = updatedUser.Password;
 
-    if(test || updatedUser.Password == user.Password){
+    if(updatedUser.Password == user.Password){
       pas = updatedUser.Password;
     }
     else{
