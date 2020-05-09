@@ -42,9 +42,9 @@ router.post('/', async (req, res) => {
     console.log(typeof blogPostData.body)
   }
 
-  if (!blogPostData.posterId) {
-    errors.push('No poster selected');
-  }
+  // if (!blogPostData.posterId) {
+  //   errors.push('No poster selected');
+  // }
 
   if (errors.length > 0) {
     res.render('posts/new', {
@@ -60,7 +60,8 @@ router.post('/', async (req, res) => {
       blogPostData.title,
       blogPostData.body,
       blogPostData.tags || [],
-      blogPostData.posterId
+      req.session.user._id,
+      []
     );
 
     res.redirect(`/posts/${newPost._id}`);
