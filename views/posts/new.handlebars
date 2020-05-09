@@ -17,7 +17,15 @@
     <textarea id="post-tag" name="tag" rows="4" placeholder="Post Tag" class="full-width-input">{{post.tag}}</textarea>
     <br>
 
-
+  <label>
+      Post Image
+      <select id = "post-image" name="image">
+	<option style="background-image:url(/public/images/dog.jpg);" class = "postimage"> dog</option>
+	<option style="background-image:url(/public/images/cat.jpg);" class = "postimage"> cat</option>
+	<option style="background-image:url(publie/images/flower.jpg);" class = "postimage" >flower</option>
+	</select> 
+    </label>
+	<br>
     {{!-- <label for="poster">
       Poster
     </label>
