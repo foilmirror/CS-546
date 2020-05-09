@@ -59,9 +59,9 @@ router.post('/', async (req, res) => {
     const newPost = await postData.addPost(
       blogPostData.title,
       blogPostData.body,
-      blogPostData.tags || [],
+      [blogPostData.tag] || [],
       req.session.user._id,
-      []
+      [blogPostData.image] || []
     );
 
     res.redirect(`/posts/${newPost._id}`);
