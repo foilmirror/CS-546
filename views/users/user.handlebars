@@ -11,9 +11,12 @@
   {{#each user.posts}}
     <li><a href="/posts/{{id}}">{{id}}</a></li>
      {{/each}}
+    {{#if you}}
+    <button><a href="/posts/new">Create a new post</a></button>
+    {{/if}}
     <h2>Friends of {{user.userName}}</h2>
     {{#each user.friends}}
-    <li><a href="/users/{{id}}">{{id}}</a></li>
+    <li><a href="/users/{{_id}}">{{userName}}</a></li>
      {{/each}}
 
   {{#if nyou}}

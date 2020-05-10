@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h1,
 h2,
 h3,
@@ -33,3 +34,8 @@ a:hover {
 a:visited {
 	color: sienna;
 }
+=======
+header{
+    text-align: right;
+}
+>>>>>>> 229fb3c2c83950d2f972a713f007506b094c4b1f

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const userData = data.users;
+const PostData = data.posts;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -37,6 +38,7 @@ router.get('/:id', async (req, res) => {
     let f = false;
     let you = false;
     let friends = [];
+    
     if(c_user.friends){
     for(let j = 0 ; j < c_user.friends.length; j++){
       let fr = await userData.getUserById(c_user.friends[j].id);
@@ -54,7 +56,7 @@ router.get('/:id', async (req, res) => {
       }
       if(c_user.friends){
       for(let x = 0 ; x < c_user.friends.length; x++){
-        if(req.session.user._id == c_user.friends[x].id){
+        if(req.session.user._id == c_user.friends[x]._id){
           f = true;
           diff = false;
           break;
@@ -77,6 +79,46 @@ router.get('/', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+
+router.post("/login", async (req, res) => {
+  const data = req.body;
+  if(!data || !data.userName || !data.password){
+      res.status(400);
+      return;
+  }
+  
+  data.userName = data.userName.toLowerCase();
+  try{
+      let success = false;
+      const users  = await userData.getAllUsers();
+      let user = users.find(u => u.userName.toLowerCase() == data.userName);
+      if(user){
+          success = await bcrypt.compare(data.password, user.Password);
+  
+          if(success=== true){
+              //Worked~
+              req.session.user = user;
+              req.session.AuthCookie = req.sessionID;
+              return res.redirect('/users/');
+          }
+          else{
+              res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });
+              console.log("You messed up bro");
+          }
+      }
+      else{
+          res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid username" });
+          console.log("You messed up bro");
+      }
+  }
+  catch{
+      res.status(404).json({ error: true });
+  }
+
+}
+
+);
 
 router.post('/', async (req, res) => {
   let userInfo = req.body;
@@ -202,11 +244,6 @@ router.put('/:id', async (req, res) => {
 
   try {
     await userData.getUserById(req.params.id);
-  } catch (e) {
-    res.status(404).json({error: 'User not found'});
-    return;
-  }
-  try {
     //If the updated thing was supposed to be friends, it will be here (happens when a person adds someone as a friend)
     if(userInfo.friends && req.session.user){
       await userData.addFriendtoUser(req.session.user._id,req.params.id);
@@ -216,7 +253,7 @@ router.put('/:id', async (req, res) => {
       res.redirect('/users/' + req.params.id)
     }
     const updatedUser = await userData.updateUser(req.params.id, userInfo);
-    res.redirect('/users/' + req.params.id)
+    res.redirect('/users/' + req.params.id);
   } catch (e) {
     res.sendStatus(500);
   }
@@ -251,44 +288,6 @@ router.delete('/:id', async (req, res) => {
 });
 
 
-router.post("/login", async (req, res) => {
-  const data = req.body;
-  if(!data || !data.userName || !data.password){
-      res.status(400);
-      return;
-  }
-  
-  data.userName = data.userName.toLowerCase();
-  try{
-      let success = false;
-      const users  = await userData.getAllUsers();
-      let user = users.find(u => u.userName.toLowerCase() == data.userName);
-      if(user){
-          success = await bcrypt.compare(data.password, user.Password);
-  
-          if(success=== true){
-              //Worked~
-              req.session.user = user;
-              req.session.AuthCookie = req.sessionID;
-              return res.redirect('/users/');
-          }
-          else{
-              res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });
-              console.log("You messed up bro");
-          }
-      }
-      else{
-          res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid username" });
-          console.log("You messed up bro");
-      }
-  }
-  catch{
-      res.status(404).json({ error: true });
-  }
-
-}
-
-);
 
 
 

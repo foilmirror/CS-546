@@ -25,11 +25,12 @@ app.use(session({
 app.use(async (req, res, next) => {
 	if (!req.session.user) {
 		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Not logged in)");
+		next();
 	}
 	else {
 		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Logged in as " + req.session.user._id + ")");
+		next();
 	}
-	next();
 });
 
 app.use('/', async (req, res, next) => {
