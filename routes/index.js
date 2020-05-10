@@ -8,9 +8,7 @@ const methodOverride = require('method-override');
 
 const constructorMethod = (app) => {
 	app.use(methodOverride('_method'));
-	app.use('/home', mainRoutes);
-	app.use('/post', postRoutes);
-	//app.use('/search', searchRoutes);
+    app.use('/posts', postRoutes);
 	app.use('/users', userRoutes);
 	app.get('/about', (req, res) => {
 		res.sendFile(path.resolve('static/about.html'));

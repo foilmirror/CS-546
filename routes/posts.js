@@ -42,9 +42,9 @@ router.post('/', async (req, res) => {
     console.log(typeof blogPostData.body)
   }
 
-  if (!blogPostData.posterId) {
-    errors.push('No poster selected');
-  }
+  // if (!blogPostData.posterId) {
+  //   errors.push('No poster selected');
+  // }
 
   if (errors.length > 0) {
     res.render('posts/new', {
@@ -59,8 +59,9 @@ router.post('/', async (req, res) => {
     const newPost = await postData.addPost(
       blogPostData.title,
       blogPostData.body,
-      blogPostData.tags || [],
-      blogPostData.posterId
+      [blogPostData.tag] || [],
+      req.session.user._id,
+      [blogPostData.image] || []
     );
 
     res.redirect(`/posts/${newPost._id}`);
