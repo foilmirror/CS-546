@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const constructorMethod = (app) => {
 	app.use(methodOverride('_method'));
 	app.use('/', mainRoutes);
-	app.use('/post', postRoutes);
+	app.use('/posts', postRoutes);
 	//app.use('/search', searchRoutes);
 	app.use('/users', userRoutes);
 	app.get('/about', (req, res) => {
