@@ -21,7 +21,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-
+  
 app.use(async (req, res, next) => {
 	if (!req.session.user) {
 		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Not logged in)");
@@ -32,10 +32,9 @@ app.use(async (req, res, next) => {
 	next();
 });
 
-
-app.use('/home', async (req, res, next) => {
-	if(!req.session.user) {
-    return res.redirect('/users/login');
+app.use('/', async (req, res, next) => {
+	if (req.url == '/' && !req.session.user) {
+    	return res.redirect('/users/login');
 	} else {
     next();
   }
