@@ -1,0 +1,35 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: rgb(148, 86, 86);
+  margin-bottom: 5px;
+}
+
+p {
+    color: rgb(82, 82, 82);
+    font-size: 1rem;
+    line-height: 2;
+}
+
+label {
+    font-weight: bold;
+    
+}
+
+a {
+	color: fuchsia;
+	text-decoration: none;
+	
+}
+
+a:hover {
+	color: gold;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: sienna;
+}
