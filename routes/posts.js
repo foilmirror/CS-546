@@ -5,8 +5,13 @@ const postData = data.posts;
 const userData = data.users;
 
 router.get('/new', async (req, res) => {
-  const users = await userData.getAllUsers();
-  res.render('posts/new', {users: users});
+  // const users = await userData.getAllUsers();
+  if (req.session.user) {
+    return res.render('posts/new');
+  }
+  else{
+    res.render('users/login',{title: 'Login'});
+  }
 });
 
 router.get('/:id', async (req, res) => {
