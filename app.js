@@ -40,6 +40,22 @@ app.use(async (req, res, next) => {
 	next();
 });
 
+app.use('/users/logout', async (req, res, next) => {
+	if(!req.session.user) {
+    return res.redirect('/about');
+	} else {
+    next();
+  }
+});
+
+app.use('/users/login', async (req, res, next) => {
+	if(req.session.user) {
+    return res.redirect('/posts');
+	} else {
+    next();
+  }
+});
+
  
 configRoutes(app);
 
