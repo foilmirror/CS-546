@@ -19,8 +19,8 @@
   {{#if post.replies.length}}
     <h3>Replies</h3>
     <ul>
-      {{#each post.replies}}
-        <li><a href="/posts/replies/{{this}}">{{this}}</a></li>
+      {{#each replies}}
+        <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
       {{/each}}
     </ul>
   {{/if}}

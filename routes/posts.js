@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const postData = data.posts;
 const userData = data.users;
+const repliesData = data.replies;
 
 router.get('/new', async (req, res) => {
   // const users = await userData.getAllUsers();
@@ -18,7 +19,14 @@ router.get('/:id', async (req, res) => {
   try {
     const post = await postData.getPostById(req.params.id);
     const poster = await userData.getUserById(post.userid);
-    res.render('posts/single', {post: post, poster: poster});
+    let replies = []
+    if(post.replies){
+      for(let j = 0 ; j < post.replies.length; j++){
+        let fr = await repliesData.getReplybyId(post.replies[j].id);  
+        replies.push(fr);
+      }
+    }
+    res.render('posts/single', {post: post, poster: poster, replies: replies});
   } catch (e) {
     res.status(500).json({error: e});
   }
