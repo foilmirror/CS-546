@@ -17,7 +17,8 @@ router.get('/new', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await postData.getPostById(req.params.id);
-    res.render('posts/single', {post: post});
+    const poster = await userData.getUserById(post.userid);
+    res.render('posts/single', {post: post, poster: poster});
   } catch (e) {
     res.status(500).json({error: e});
   }
