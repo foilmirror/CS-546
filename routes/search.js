@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const data = require('../data');
+const postData = data.posts;
+const userData = data.users;
+
 router.get('/', async (req, res) => {
     res.render('search/index');
 });
@@ -23,7 +27,8 @@ router.post('/', async (req, res) => {
         res.redirect('../posts/tag/'+ SearchData.text)
     }
     if(SearchData.searchby=="user"){
-        res.redirect('../users')
+        let Searchuser = await userData.getUserByName(SearchData.text);
+        res.redirect('../users/' + Searchuser._id)
     }
 
 });
