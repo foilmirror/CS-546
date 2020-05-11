@@ -187,7 +187,8 @@ router.post('/', async (req, res) => {
   try {
     const h = await bcrypt.hash(userInfo.Password,saltRounds);
     const newUser = await userData.addUser(userInfo.userName,userInfo.Email,userInfo.profilePhoto,userInfo.Gender,userInfo.City,userInfo.State,userInfo.Age,h);
-    res.render('users/login', {});
+    // res.render('users/login', {});
+    return res.redirect('/users/login');
   } catch (e) {
     res.sendStatus(500);
   }
