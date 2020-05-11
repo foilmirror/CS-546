@@ -31,5 +31,15 @@
       {{/each}}
     </ul>
   {{/if}}
+
+  <form action="/replies" method="POST" class="reply-form">
+    <label>
+      reply
+      <input type="text" name="text" placeholder="text" class="full-width-input" />
+      
+    </label>
+    <br>    
+    <button type="submit">submit</button>
+</form>
   <a href="/posts">Back to All Posts</a>
 </article>
