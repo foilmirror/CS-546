@@ -43,7 +43,11 @@ router.post('/', async (req, res) => {
             let Searchuser = await userData.getUserByName(SearchData.text);
             res.redirect('../users/' + Searchuser._id)
           } catch (e) {
-            res.status(500).json({error: e});
+            res.render('search/index', {
+                errors: [e],
+                hasErrors: true,
+                post: SearchData
+              });
           }
           
     }
