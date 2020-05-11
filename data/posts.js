@@ -18,7 +18,7 @@ const exportedMethods = {
   },
 
   async getPostsbyUser(userId){
-    if (!userId) throw 'No tag provided';
+    if (!userId) throw 'No user Id provided';
     const postCollection = await posts();
     return await postCollection.find({posterId: userId}).toArray();
   },

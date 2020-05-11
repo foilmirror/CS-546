@@ -24,8 +24,12 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/tag/:tag', async (req, res) => {
+  try {
   const postList = await postData.getPostsByTag(req.params.tag);
   res.render('posts/index', {posts: postList});
+  } catch (e) {
+    res.status(500).json({error: e});
+}
 });
 
 router.get('/', async (req, res) => {
