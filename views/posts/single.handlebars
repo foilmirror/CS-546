@@ -3,9 +3,9 @@
 
 <link rel="stylesheet" href="../public/css/post.css">
 <article class="post">
-  <h1>{{ post.title }}</h1>
+  <h2>{{ post.title }}</h2>
   {{!-- <address>Posted by {{post.poster.name}}</address> --}}
-  <p>Posted by <a href="/users/{{poster._id}}">{{poster.userName}}</a></p>
+  <p class="author">Posted by <a href="/users/{{poster._id}}">{{poster.userName}}</a></p>
   <p>{{ post.body }}</p>
 
   {{#if post.tags.length}}

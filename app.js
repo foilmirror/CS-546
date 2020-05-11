@@ -50,7 +50,7 @@ app.use('/users/logout', async (req, res, next) => {
 
 app.use('/users/login', async (req, res, next) => {
 	if(req.session.user) {
-    return res.redirect('/posts');
+    return res.redirect('/users/logout');
 	} else {
     next();
   }
