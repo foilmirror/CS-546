@@ -37,15 +37,25 @@ router.get('/:id', async (req, res) => {
     let diff = false;
     let f = false;
     let you = false;
-    let friends = [];
+    let amigos = [];
+    let posta = [];
+    if(c_user.posts){
+      for(let q = 0; q < c_user.posts.length; q++){
+        let re = await PostData.getPostById(c_user.posts[q].id);
+        posta.push(re);
+      }
+      posta = posta;
+    }
     
     if(c_user.friends){
-    for(let j = 0 ; j < c_user.friends.length; j++){
-      let fr = await userData.getUserById(c_user.friends[j].id);
-      friends.push(fr);
+      for(let j = 0 ; j < c_user.friends.length; j++){
+        let fr = await userData.getUserById(c_user.friends[j].id);  
+        amigos.push(fr);
+      }
+  
+      amigos = amigos;
+  
     }
-    c_user.friends = friends;
-  }
     if(req.session.user){
       if(req.session.user._id != c_user._id){
           diff = true;
@@ -56,7 +66,7 @@ router.get('/:id', async (req, res) => {
       }
       if(c_user.friends){
       for(let x = 0 ; x < c_user.friends.length; x++){
-        if(req.session.user._id == c_user.friends[x]._id){
+        if(req.session.user._id == c_user.friends[x].id){
           f = true;
           diff = false;
           break;
@@ -65,7 +75,7 @@ router.get('/:id', async (req, res) => {
       }
     }
   }
-    res.render('users/user', {user: c_user, nyou: diff, i: req.session.user, friend: f, you:you});
+    res.render('users/user', {user: c_user, nyou: diff, amigos: amigos, posts: posta, i: req.session.user, friend: f, you:you});
   } catch (e) {
     res.status(404).json({error: 'User not found'});
   }
@@ -187,8 +197,7 @@ router.post('/', async (req, res) => {
   try {
     const h = await bcrypt.hash(userInfo.Password,saltRounds);
     const newUser = await userData.addUser(userInfo.userName,userInfo.Email,userInfo.profilePhoto,userInfo.Gender,userInfo.City,userInfo.State,userInfo.Age,h);
-    // res.render('users/login', {});
-    return res.redirect('/users/login');
+    res.render('users/login', {});
   } catch (e) {
     res.sendStatus(500);
   }
@@ -272,7 +281,7 @@ router.delete('/:id', async (req, res) => {
     //This will handle deleting users from friend lists (when a button is pressed on the actual site)
     //This is because removing friends is a user to user thing so idk where else this would go lol
     if(req.body.userID){
-      await userData.removeFriend(req.params.id,req.body.userID);
+      await userData.removeFriend(req.params.id,req.session.user._id);
       await userData.removeFriend(req.session.user._id,req.params.id);
       res.redirect('/users/' + req.params.id);
   
