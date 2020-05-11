@@ -27,8 +27,13 @@ router.post('/', async (req, res) => {
         res.redirect('../posts/tag/'+ SearchData.text)
     }
     if(SearchData.searchby=="user"){
-        let Searchuser = await userData.getUserByName(SearchData.text);
-        res.redirect('../users/' + Searchuser._id)
+        try {
+            let Searchuser = await userData.getUserByName(SearchData.text);
+            res.redirect('../users/' + Searchuser._id)
+          } catch (e) {
+            res.status(500).json({error: e});
+          }
+          
     }
 
 });
