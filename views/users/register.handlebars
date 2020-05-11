@@ -3,18 +3,18 @@
 {{#if error}}
 <p> {{etext}} </p>
 {{/if}}
-  <h1>Register</h1>
+  <h2>Create an account</h2>
   <form action="/users" method="POST" class="new-user-form">
 
     <label>
       User Name
-      <input type="text" name="userName" placeholder="userName" value="{{user.userName}}" class="full-width-input"/>
+      <input type="text" name="userName" placeholder="username" value="{{user.userName}}" class="full-width-input"/>
     </label>
 	<br>
 
     <label>
       Email
-      <input type="text" name="Email" placeholder="Email" value = "{{user.Email}}" class="full-width-input"/>
+      <input type="text" name="Email" placeholder="example@gmail.com" value = "{{user.Email}}" class="full-width-input"/>
     </label>
 	<br>
 
@@ -111,7 +111,7 @@
 
     <label>
       Password
-      <input type="password" name="Password" class = "Password" placeholder="Password" value = "{{user.Password}}"/>
+      <input type="password" name="Password" class = "Password" placeholder="password" value = "{{user.Password}}"/>
     </label>
 	<br>
 

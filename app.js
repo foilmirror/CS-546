@@ -56,6 +56,14 @@ app.use('/users/login', async (req, res, next) => {
   }
 });
 
+app.use('/users/new', async (req, res, next) => {
+	if(req.session.user) {
+    return res.redirect('/about');
+	} else {
+    next();
+  }
+});
+
  
 configRoutes(app);
 
