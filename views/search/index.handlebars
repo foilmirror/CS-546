@@ -1,0 +1,25 @@
+<form action="/search" method="POST" class="search-form">
+<label>
+      Search by
+      <select id="searchby" name="searchby"> 
+        <option value="tag">tag</option>
+	    <option value="user">user</option>
+    </select>
+</label>
+    <label>
+      text
+      <input type="text" name="text" placeholder="text" class="full-width-input" />
+      
+    </label>
+    <br>    
+    <button type="submit">Search</button>
+</form>
+{{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
