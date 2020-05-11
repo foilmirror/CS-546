@@ -1,4 +1,3 @@
-const mainRoutes = require('./main');
 const postRoutes = require('./posts');
 const searchRoutes = require('./search');
 const userRoutes = require('./users');
@@ -8,7 +7,6 @@ const methodOverride = require('method-override');
 
 const constructorMethod = (app) => {
 	app.use(methodOverride('_method'));
-	app.use('/', mainRoutes);
 	app.use('/posts', postRoutes);
 	//app.use('/search', searchRoutes);
 	app.use('/users', userRoutes);
