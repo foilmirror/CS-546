@@ -23,8 +23,20 @@ router.post('/', async (req, res) => {
         });
         return;
       }
-    if(SearchData.searchby=="tag"){
-        res.redirect('../posts/tag/'+ SearchData.text)
+      if(SearchData.searchby=="tag"){
+        let Searchtag = await postData.getPostsByTag(SearchData.text);
+        if(Searchtag.length==0){
+          errors.push('No such tag');
+        }
+        if (errors.length > 0) {
+          res.render('search/index', {
+            errors: errors,
+            hasErrors: true,
+            post: SearchData
+          });
+          return;
+        }
+      res.redirect('../posts/tag/'+ SearchData.text)
     }
     if(SearchData.searchby=="user"){
         try {
