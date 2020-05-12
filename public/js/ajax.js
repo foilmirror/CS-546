@@ -1,8 +1,10 @@
 (function ($) {
     var replyButton = $('#reply-start'),
       newReplyBody = $('#post-body'),
-      submitButton = $('#reply-submit'),
+      replyForm = $('#reply-submit'),
       postList = $('#post-list');
+      replyList = $('#reply-list');
+      postId = $('#post-id');
   
     function bindEventsToButtons(postItem) {
         postItem.find('.replyItem').on('click', function (event) {
@@ -23,33 +25,37 @@
         });
       });
     }
+
+    if (replyButton) {
+        postList.children().each(function (index, element) {
+            bindEventsToButtons($(element));
+        });
+    }
+    
   
-    postList.children().each(function (index, element) {
-        bindEventsToButtons($(element));
-    });
-  
-    myNewTaskForm.submit(function (event) {
+    replyForm.submit(function (event) {
       event.preventDefault();
-  
+
       var newReply = newReplyBody.val();
+      var oldPost = postId.val();
   
       if (newReply) {
           var requestConfig = {
             method: 'POST',
-            url: '/posts/todo.html',
+            url: '/replies/update.html',
             contentType: 'application/json',
             data: JSON.stringify({
-              name: newName,
-              description: newDescription
+                id: oldPost,
+                body: newReply
             })
           };
   
           $.ajax(requestConfig).then(function (responseMessage) {
             console.log(responseMessage);
             var newElement = $(responseMessage);
-            bindEventsToTodoItem(newElement);
+            //bindEventsToTodoItem(newElement);
   
-            todoArea.append(newElement);
+            replyList.append(newElement);
           });
       }
     });

@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<link rel="stylesheet" href="../public/css/post.css">
 <article class="post">
   <h2>{{ post.title }}</h2>
   {{!-- <address>Posted by {{post.poster.name}}</address> --}}
@@ -16,23 +12,29 @@
       {{/each}}
     </ul>
   {{/if}}
-  {{#if post.replies.length}}
-    <h3>Replies</h3>
-    <ul>
-      {{#each replies}}
-        <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
   {{#if post.images.length}}
     <h3>Images</h3>
     <ul>
       {{#each post.images}}
-        <h2><img src="/public/images/{{ this }}.jpg" ></h2>
+        <li><img src="/public/images/{{this}}.jpg" alt={{this}} class='picture'></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  {{#if post.replies.length}}
+    <h3>Replies</h3>
+    <ul id="reply-list">
+      {{#each replies}}
+      <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
+        <li>
+          <ul>
+            <li>Posted by <a href="/users/{{replier}}"></a></li>
+          </ul>
+        </li>
       {{/each}}
     </ul>
   {{/if}}
 
+<!--
   <form action="/replies" method="POST" class="reply-form">
   <input type="hidden" name="id" value={{post._id}} placeholder="text" class="full-width-input" />
     <label>
@@ -43,6 +45,16 @@
     <br>    
     <button type="submit">submit</button>
 </form>
+/!-->
+      <form id="reply-submit">
+        <input type="hidden" id="post-id" name="id" value={{post._id}} />
+        <label for="post-body">
+          Reply Body
+        </label>
+        <textarea id="post-body" name="body" rows="4" placeholder="Reply Content" class="full-width-input">{{post.body}}</textarea>
+        <br>  
+        <button type="submit">Submit</button>
+      </form>
   {{#if hasErrors}}
   <ul class="error-list">
     {{#each errors}}

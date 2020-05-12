@@ -24,6 +24,7 @@ router.get('/:id', async (req, res) => {
       for(let j = 0 ; j < post.replies.length; j++){
         let fr = await repliesData.getReplybyId(post.replies[j].id);  
         replies.push(fr);
+        replies[j].replier = await userData.getUserById(replies[j].userid);
       }
     }
     res.render('posts/single', {post: post, poster: poster, replies: replies});

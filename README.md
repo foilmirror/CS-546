@@ -4,8 +4,8 @@ Final project for Web Programming 1
 ```
 TODO: 
 
-Finish up user login + post functionality + searching
-Implement main page ajax for replies
+Finish up user login + post functionality + searching + replies
+Check post/reply routes to make sure user is loggged in!
 All CSS
 XSS in routes
 Bootstrap if we have time

@@ -78,7 +78,7 @@ router.post('/', async (req, res) => {
       let replyData = req.body;
       let errors = [];
     
-      if (!replyData.text) {
+      if (!replyData.body) {
         errors.push('No reply provided');
       }
 
@@ -105,11 +105,11 @@ router.post('/', async (req, res) => {
         const newReply = await repliesData.addReply(
           replyData.id,
           req.session.user._id,
-          replyData.text
+          replyData.body
         );
         const replier = await userData.getUserById(req.session.user._id,);
     
-        response.render('posts/reply', { layout: null, ...newReply, poster: replier });
+        res.render('posts/reply', { layout: null, text: newReply, poster: replier });
       } catch (e) {
         console.log(e)
         res.status(500).json({error: e});

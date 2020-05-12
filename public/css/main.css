@@ -33,6 +33,11 @@ label {
     font-weight: bold;
 }
 
+.picture{
+    max-width:15%; 
+    height:auto; 
+}
+
 p.author {
     font-style: italic;
     font-size: 90%;
