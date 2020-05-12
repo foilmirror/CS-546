@@ -115,12 +115,12 @@ router.post("/login", async (req, res) => {
           }
           else{
               res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });
-              console.log("You messed up bro");
+              
           }
       }
       else{
           res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid username" });
-          console.log("You messed up bro");
+         
       }
   }
   catch{
@@ -278,7 +278,6 @@ router.put('/:id', async (req, res) => {
 
   userInfo.Email = userInfo.Email.toLowerCase();
   let em = users.find(u => u.Email.toLowerCase() == userInfo.Email);
-  console.log(em);
   if(em){
   if(em._id != req.params.id){
     res.render('users/user', {user: c_user, nyou: diff, amigos: amigos, posts: posta, i: req.session.user, friend: f, you:you, error:true, etext: "email taken"});
