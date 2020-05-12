@@ -4,11 +4,16 @@ Final project for Web Programming 1
 ```
 TODO: 
 
-Finish up user login + post functionality + searching + replies
-Check post/reply routes to make sure user is loggged in!
-All CSS
-XSS in routes
-Bootstrap if we have time
+Implement friend system
+Finish up searching + replies
+Check all posting/replying routes to make sure user is loggged in
+Hide html elements that shouldn't appear to non-users
+Implement edit/delete for posts/replies when logged in
+Add XSS to all routes
+Improve site design and all CSS; add bootstrap if we have time
+
+Custom images
+
 ```
 
 **Group members:**
@@ -24,7 +29,7 @@ Main page: Show all posts
 
 Post page: Allow user to post text and images, allow user to edit/ delete former posts
 
-Profile page: Show user’s profile, show the list of all the post of the user
+Profile page: Show user’s profile, show the list of all the user's posts
 
 
 **Extra Features:**
