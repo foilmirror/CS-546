@@ -26,7 +26,7 @@ let exportedMethods = {
         const newId = newInsertInformation.insertedId;
 
     if (newInsertInformation.insertedCount === 0) throw 'Insert failed!';
-    await postData.addReplyToPost(postid, newId);
+    await postData.addReplytoPost(postid, newId);
     // return await this.getReplyById(newInsertInformation.insertedId);
 
     },
