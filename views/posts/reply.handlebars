@@ -1,4 +1,8 @@
 <article class="reply">
-  <p class="author">Posted by <a href="/users/{{poster._id}}">{{poster.userName}}</a></p>
-  <p>{{ text }}</p>
+  <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
+      <li>
+        <ul>
+          <li class="author">Posted by <a href="/users/{{poster._id}}">{{poster.userName}}</a></li>
+        </ul>
+      </li>
 </article>

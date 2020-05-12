@@ -1,9 +1,10 @@
 header{
+    color: rgb(59, 31, 216);
     text-align: right;
 }
 
 h1 {
-    color: rgb(148, 86, 86);
+    color: rgb(59, 31, 216);
     font-size: 28px;
     margin-bottom: 5px;
 }

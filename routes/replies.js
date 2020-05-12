@@ -109,7 +109,7 @@ router.post('/', async (req, res) => {
         );
         const replier = await userData.getUserById(req.session.user._id,);
     
-        res.render('posts/reply', { layout: null, text: newReply, poster: replier });
+        res.render('posts/reply', { layout: null, text: newReply.text, _id: newReply.postid, poster: replier });
       } catch (e) {
         console.log(e)
         res.status(500).json({error: e});

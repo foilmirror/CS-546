@@ -20,9 +20,10 @@
       {{/each}}
     </ul>
   {{/if}}
-  {{#if post.replies.length}}
+
     <h3>Replies</h3>
     <ul id="reply-list">
+    {{#if post.replies.length}}
       {{#each replies}}
       <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
         <li>
@@ -31,8 +32,8 @@
           </ul>
         </li>
       {{/each}}
+    {{/if}}
     </ul>
-  {{/if}}
 
 <!--
   <form action="/replies" method="POST" class="reply-form">
