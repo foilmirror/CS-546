@@ -206,6 +206,48 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   
   let userInfo = req.body;
+  let c_user = await userData.getUserById(req.params.id);
+    let diff = false;
+    let f = false;
+    let you = false;
+    let amigos = [];
+    let posta = [];
+    if(c_user.posts){
+      for(let q = 0; q < c_user.posts.length; q++){
+        let re = await PostData.getPostById(c_user.posts[q].id);
+        posta.push(re);
+      }
+      posta = posta;
+    }
+    
+    if(c_user.friends){
+      for(let j = 0 ; j < c_user.friends.length; j++){
+        let fr = await userData.getUserById(c_user.friends[j].id);  
+        amigos.push(fr);
+      }
+  
+      amigos = amigos;
+  
+    }
+    if(req.session.user){
+      if(req.session.user._id != c_user._id){
+          diff = true;
+      }
+
+      else{
+          you = true;
+      }
+      if(c_user.friends){
+      for(let x = 0 ; x < c_user.friends.length; x++){
+        if(req.session.user._id == c_user.friends[x].id){
+          f = true;
+          diff = false;
+          break;
+        }
+
+      }
+    }
+  }
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user'});
     return;
@@ -215,11 +257,39 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({error: 'You must provide a user name'});
     return;
   }
+  userInfo.userName = userInfo.userName.toLowerCase();
+  const users  = await userData.getAllUsers();
+
+  let e = users.find(u => u.userName.toLowerCase() == userInfo.userName);
+  
+  if(e){
+  if(e._id != req.params.id){
+    res.render('users/user', {user: c_user, nyou: diff, amigos: amigos, posts: posta, i: req.session.user, friend: f, you:you, error:true, etext: "username taken"});
+    return;
+  }
+}
+  
 
   if (!userInfo.Email) {
     res.status(400).json({error: 'You must provide a Email'});
     return;
   }
+
+  userInfo.Email = userInfo.Email.toLowerCase();
+  let em = users.find(u => u.Email.toLowerCase() == userInfo.Email);
+  console.log(em);
+  if(em){
+  if(em._id != req.params.id){
+    res.render('users/user', {user: c_user, nyou: diff, amigos: amigos, posts: posta, i: req.session.user, friend: f, you:you, error:true, etext: "email taken"});
+    return;
+  }
+}
+
+  if (!userInfo.Email) {
+    res.status(400).json({error: 'You must provide a Email'});
+    return;
+  }
+
 
   if (!userInfo.Gender) {
     res.status(400).json({error: 'You must provide a gender'});

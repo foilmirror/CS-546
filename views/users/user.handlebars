@@ -33,6 +33,7 @@
   <button type="submit">Add</button>
   </form>
   {{/if}}
+   
 
   {{#if friend}}
    <form action="/users/{{user._id}}?_method=DELETE" method="post">
@@ -47,6 +48,9 @@
    <br>
    <br>
    <h1>Update Info</h1>
+   {{#if error}}
+  {{etext}}
+  {{/if}}
     <form action="/users/{{user._id}}?_method=PUT" method="post">
   <input type="hidden" name="_method" value="PUT">
   <label>
