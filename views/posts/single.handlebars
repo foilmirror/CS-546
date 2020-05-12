@@ -25,12 +25,13 @@
     <ul id="reply-list">
     {{#if post.replies.length}}
       {{#each replies}}
-      <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
+      <li>{{text}}</li>
         <li>
           <ul>
-            <li>Posted by <a href="/users/{{replier._id}}">{{replier.userName}}</a></li>
+            <li class="author">Posted by <a href="/users/{{replier._id}}">{{replier.userName}}</a></li>
           </ul>
         </li>
+      <br>
       {{/each}}
     {{/if}}
     </ul>

@@ -39,7 +39,7 @@ label {
     height:auto; 
 }
 
-p.author {
+.author {
     font-style: italic;
     font-size: 90%;
 }
