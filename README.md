@@ -27,7 +27,7 @@ Home page: Brief explanation of features/ the website
 
 Main page: Show all posts
 
-Post page: Allow user to post text and images, allow user to edit/ delete former posts
+Post page: Allow user to post text and images, allow user to delete their posts
 
 Profile page: Show user’s profile, show the list of all the user's posts
 

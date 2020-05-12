@@ -6,12 +6,14 @@ const postData = require('./posts');
 
 let exportedMethods = {
 
-    async getReplybyId(id){
-    const replyCollection = await replies();
-    const reply = await replyCollection.findOne({_id: id});
-    if (!reply) throw 'reply not found';
-    return reply;
+    async getReplyById(id){
+      const replyCollection = await replies();
+      const reply = await replyCollection.findOne({_id: id});
+      if (!reply) throw 'reply not found';
+      return reply;
     },
+
+
 
     async addReply(postid,userid,text){
         const replyCollection = await replies();
@@ -31,6 +33,8 @@ let exportedMethods = {
     return newReply;
 
     },
+
+
 
     async removeReply(replyid){
     const replyCollection = await replies();
@@ -54,9 +58,10 @@ let exportedMethods = {
       throw `Could not delete post with id of ${id}`;
     }
 
-    await postData.removeReplyFromPost(reply.postid, replyid);
-    return true;
+    //await postData.removeReplyFromPost(reply.postid, replyid);
+    //this will be necessary when we add the ability to delete replies on their own
 
+    return true;
     }
 };
 

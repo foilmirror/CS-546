@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
     let replies = []
     if(post.replies){
       for(let j = 0 ; j < post.replies.length; j++){
-        let fr = await repliesData.getReplybyId(post.replies[j].id);  
+        let fr = await repliesData.getReplyById(post.replies[j].id);  
         replies.push(fr);
         replies[j].replier = await userData.getUserById(replies[j].userid);
       }
@@ -125,8 +125,13 @@ router.post('/delete/:id', async (req, res) => {
     if (req.session.user._id != post.userid) {
       throw "You shouldn't be here!";
     } //idk if this test is necessary or not but I'd rather be safe
+
     await postData.removePost(req.params.id);
     await userData.removePostFromUser(req.session.user._id, req.params.id)
+    for (i = 0; i < post.replies.length; i++) {
+      console.log("deleting reply " + i);
+      await repliesData.removeReply(post.replies[i].id);
+    }
     res.redirect(200, "/posts");
   } catch (e) {
     res.status(500).json({error: e});

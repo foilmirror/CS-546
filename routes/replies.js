@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
       let replies = []
       if(post.replies){
         for(let j = 0 ; j < post.replies.length; j++){
-          let fr = await repliesData.getReplybyId(post.replies[j].id);  
+          let fr = await repliesData.getReplyById(post.replies[j].id);  
           replies.push(fr);
         }
       }
@@ -88,7 +88,7 @@ router.post('/', async (req, res) => {
         let replies = []
         if(post.replies){
           for(let j = 0 ; j < post.replies.length; j++){
-            let fr = await repliesData.getReplybyId(post.replies[j].id);  
+            let fr = await repliesData.getReplyById(post.replies[j].id);  
             replies.push(fr);
           }
         }
