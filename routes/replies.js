@@ -24,11 +24,18 @@ router.post('/', async (req, res) => {
       // try {
       const post = await postData.getPostById(replyData.id);
       const poster = await userData.getUserById(post.userid);
-
+      let replies = []
+      if(post.replies){
+        for(let j = 0 ; j < post.replies.length; j++){
+          let fr = await repliesData.getReplybyId(post.replies[j].id);  
+          replies.push(fr);
+        }
+      }
       res.render('posts/single', {
         errors: errors,
         hasErrors: true,
         post: post,
+        poster: poster,
         poster: poster
       });
       // res.render('posts/single', {post: post});
