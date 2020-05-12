@@ -113,14 +113,18 @@ router.put('/:id', async (req, res) => {
 });
 
 router.post('/delete/:id', async (req, res) => {
+  let post = {};
   try {
-    await postData.getPostById(req.params.id);
+    post = await postData.getPostById(req.params.id);
   } catch (e) {
     res.status(404).json({error: 'Post not found'});
     return;
   }
 
   try {
+    if (req.session.user._id != post.userid) {
+      throw "You shouldn't be here!";
+    } //idk if this test is necessary or not but I'd rather be safe
     await postData.removePost(req.params.id);
     await userData.removePostFromUser(req.session.user._id, req.params.id)
     res.redirect(200, "/posts");
