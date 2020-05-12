@@ -27,7 +27,13 @@ router.get('/:id', async (req, res) => {
         replies[j].replier = await userData.getUserById(replies[j].userid);
       }
     }
-    res.render('posts/single', {post: post, poster: poster, replies: replies});
+
+    let authorCheck = false;
+    if(req.session.user) {
+      authorCheck = (post.userid == req.session.user._id);
+    }
+
+    res.render('posts/single', {post: post, poster: poster, replies: replies, authorCheck: authorCheck});
   } catch (e) {
     res.status(500).json({error: e});
   }
@@ -57,9 +63,10 @@ router.post('/', async (req, res) => {
 
   if (!blogPostData.body) {
     errors.push('No body provided');
-  }else{
-    console.log(typeof blogPostData.body)
   }
+  /* else{
+    console.log(typeof blogPostData.body)
+  }*/
 
   // if (!blogPostData.posterId) {
   //   errors.push('No poster selected');
@@ -105,7 +112,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.post('/delete/:id', async (req, res) => {
   try {
     await postData.getPostById(req.params.id);
   } catch (e) {
@@ -115,7 +122,8 @@ router.delete('/:id', async (req, res) => {
 
   try {
     await postData.removePost(req.params.id);
-    res.sendStatus(200);
+    await userData.removePostFromUser(req.session.user._id, req.params.id)
+    res.redirect(200, "/posts");
   } catch (e) {
     res.status(500).json({error: e});
   }

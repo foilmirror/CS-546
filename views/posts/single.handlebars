@@ -52,11 +52,13 @@
         <label for="post-body">
           Reply Body
         </label>
+        <br>
         <textarea id="post-body" name="body" rows="4" placeholder="Reply Content" class="full-width-input">{{post.body}}</textarea>
         <br>  
         <button type="submit">Submit</button>
       </form>
   {{#if hasErrors}}
+  <br>
   <ul class="error-list">
     {{#each errors}}
     <li>
@@ -64,6 +66,13 @@
     </li>
     {{/each}}
   </ul>
+  {{/if}}
+  <br>
+  {{#if authorCheck}}
+    <form action="/posts/delete/{{post._id}}" method="POST" class="delete-post-form">
+        <button type="submit">Delete post</button>
+    </form>
+  <br>
   {{/if}}
   <a href="/posts">Back to All Posts</a>
 </article>

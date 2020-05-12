@@ -116,7 +116,7 @@ let exportedMethods = {
 
     let currentUser = await this.getUserById(userId);
 
-    console.log(currentUser);
+    //console.log(currentUser);
 
 
 

@@ -92,7 +92,7 @@ const exportedMethods = {
       throw `Could not delete post with id of ${id}`;
     }
 
-    await users.removePostFromUser(post.poster.id, id);
+    await users.removePostFromUser(post.userid, id);
     return true;
 
   },

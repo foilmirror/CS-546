@@ -35,7 +35,7 @@ app.use(async (req, res, next) => {
 		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Not logged in)");
 	}
 	else {
-		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Logged in as " + req.session.user._id + ")");
+		console.log("[" + new Date().toUTCString() + "]: " + req.method + " to " + req.originalUrl + " (Logged in as " + req.session.user.userName + ")");
 	}
 	next();
 });

@@ -4,15 +4,14 @@ Final project for Web Programming 1
 ```
 TODO: 
 
+Add pages for individual replies?
 Implement friend system
-Finish up searching + replies
 Check all posting/replying routes to make sure user is loggged in
-Hide html elements that shouldn't appear to non-users
-Implement edit/delete for posts/replies when logged in
+Hide any html elements that shouldn't appear to non-users
 Add XSS to all routes
 Improve site design and all CSS; add bootstrap if we have time
 
-Custom images
+Custom images?
 
 ```
 

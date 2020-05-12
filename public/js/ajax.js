@@ -51,7 +51,7 @@
           };
   
           $.ajax(requestConfig).then(function (responseMessage) {
-            console.log(responseMessage);
+            //console.log(responseMessage);
             var newElement = $(responseMessage);
             //bindEventsToTodoItem(newElement);
   
