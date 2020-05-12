@@ -42,5 +42,14 @@
     <br>    
     <button type="submit">submit</button>
 </form>
+  {{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
   <a href="/posts">Back to All Posts</a>
 </article>
