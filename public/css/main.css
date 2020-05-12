@@ -58,3 +58,7 @@ a:hover {
 a:visited {
 	color: sienna;
 }
+
+aside{
+    float: right;
+}

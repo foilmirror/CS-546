@@ -4,6 +4,7 @@ const data = require('../data');
 const userData = data.users;
 const PostData = data.posts;
 const bcrypt = require('bcrypt');
+const xss = require('xss');
 const saltRounds = 10;
 
 router.get('/new', async (req, res) => {
@@ -12,7 +13,7 @@ router.get('/new', async (req, res) => {
 
 router.get("/login", (req, res) => {
   if (req.session.user) {
-      return res.redirect('/users/' + req.session.user._id);
+      return res.redirect('/users/' + xss(req.session.user._id));
   }
   else{
       res.render('users/login',{title: 'Login'});
