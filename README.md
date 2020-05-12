@@ -4,7 +4,6 @@ Final project for Web Programming 1
 ```
 TODO: 
 
-Implement friend system
 Check all posting/replying routes to make sure user is loggged in
 Hide any html elements that shouldn't appear to non-users
 Add XSS to all routes
