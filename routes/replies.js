@@ -23,10 +23,13 @@ router.post('/', async (req, res) => {
     if (errors.length > 0) {
       // try {
       const post = await postData.getPostById(replyData.id);
+      const poster = await userData.getUserById(post.userid);
+
       res.render('posts/single', {
         errors: errors,
         hasErrors: true,
-        post: post
+        post: post,
+        poster: poster
       });
       // res.render('posts/single', {post: post});
     // } catch (e) {
