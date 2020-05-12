@@ -27,7 +27,7 @@
       <li><a href="/posts/replies/{{_id}}">{{text}}</a></li>
         <li>
           <ul>
-            <li>Posted by <a href="/users/{{replier}}"></a></li>
+            <li>Posted by <a href="/users/{{replier._id}}">{{replier.userName}}</a></li>
           </ul>
         </li>
       {{/each}}
