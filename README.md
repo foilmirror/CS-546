@@ -4,6 +4,7 @@ Final project for Web Programming 1
 ```
 TODO: 
 
+Replies need to be deleted when their original post is deleted
 Add pages for individual replies?
 Implement friend system
 Check all posting/replying routes to make sure user is loggged in
