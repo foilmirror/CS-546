@@ -1,8 +1,15 @@
 header{
+    outline: 5px dashed rgb(133, 161, 250);
     background: rgb(133, 184, 241);
     color: rgb(59, 31, 216);
     text-align: right;
     padding: 10px;
+}
+
+body {
+    outline: 5px dashed rgb(133, 161, 250);
+    background: #bfd2f7;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 h1 {
@@ -44,7 +51,7 @@ form {
 }
 
 .post {
-    outline: 5px solid black;
+    outline: 5px dashed rgb(133, 161, 250);
     margin-right: 60%;
 }
 
