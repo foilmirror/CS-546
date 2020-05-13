@@ -5,7 +5,6 @@ Final project for Web Programming 1
 TODO: 
 
 Double check all routes/permissions
-Validate HTML and run tota11y tests
 
 Improve CSS/Bootstrap?
 

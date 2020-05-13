@@ -4,7 +4,7 @@
   <p class="author">Posted by <a href="/users/{{poster._id}}">{{poster.userName}}</a></p>
   <p>{{ post.body }}</p>
 
-  {{#if post.tags.length}}
+  {{#if check.tags}}
     <h3>Tags</h3>
     <ul>
       {{#each post.tags}}
@@ -12,7 +12,7 @@
       {{/each}}
     </ul>
   {{/if}}
-  {{#if post.images.length}}
+  {{#if check.images}}
     <h3>Images</h3>
     <ul>
       {{#each post.images}}
@@ -20,34 +20,23 @@
       {{/each}}
     </ul>
   {{/if}}
+  
 
     <h3>Replies</h3>
     <ul id="reply-list">
-    {{#if post.replies.length}}
+    {{#if check.replies}}
       {{#each replies}}
       <li>{{text}}</li>
-        <li>
+        <li class="list-end">
           <ul>
             <li class="author">Posted by <a href="/users/{{replier._id}}">{{replier.userName}}</a></li>
           </ul>
         </li>
-      <br>
       {{/each}}
     {{/if}}
     </ul>
 
-<!--
-  <form action="/replies" method="POST" class="reply-form">
-  <input type="hidden" name="id" value={{post._id}} placeholder="text" class="full-width-input" />
-    <label>
-      reply
-      <input type="text" name="text" placeholder="text" class="full-width-input" />
-      
-    </label>
-    <br>    
-    <button type="submit">submit</button>
-</form>
-/!-->
+{{#if check.author}}
       <form id="reply-submit">
         <input type="hidden" id="post-id" name="id" value={{post._id}} />
         <label for="post-body">
@@ -58,6 +47,7 @@
         <br>  
         <button type="submit">Submit</button>
       </form>
+  {{/if}}
   {{#if hasErrors}}
   <br>
   <ul class="error-list">
@@ -69,7 +59,7 @@
   </ul>
   {{/if}}
   <br>
-  {{#if authorCheck}}
+  {{#if check.author}}
     <form action="/posts/delete/{{post._id}}" method="POST" class="delete-post-form">
         <button type="submit">Delete post</button>
     </form>

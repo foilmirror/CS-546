@@ -28,12 +28,20 @@ router.get('/:id', async (req, res) => {
       }
     }
 
-    let authorCheck = false;
+    let check = {
+      tags: false,
+      images: false,
+      replies: false,
+      author: false
+    };
     if(req.session.user) {
-      authorCheck = (post.userid == req.session.user._id);
+      check.author = (post.userid == req.session.user._id);
     }
+    check.tags = (post.tags[0] != "");
+    check.images = (post.images.length > 0);
+    check.replies = (post.replies.length > 0);
 
-    res.render('posts/single', {post: post, poster: poster, replies: replies, authorCheck: authorCheck});
+    res.render('posts/single', {post: post, poster: poster, replies: replies, check: check});
   } catch (e) {
     res.status(500).json({error: e});
   }
