@@ -5,16 +5,16 @@
   <h2>Location: {{user.City}}, {{user.State}}</h2>
   <h2 class = "posts">Posts done by {{user.userName}}</h2>
   {{#each posts}}
-    <a href="/posts/{{_id}}">{{title}}</a>
+    <a class = "other" href="/posts/{{_id}}">{{title}}</a>
     <br>
      {{/each}}
     {{#if you}}
     <br>
-   <a href="/posts/new">Create a new post</a>
+   <a class = "other" href="/posts/new">Create a new post</a>
     {{/if}}
     <h2>Friends of {{user.userName}}</h2>
     {{#each amigos}}
-    <a href="/users/{{_id}}">{{userName}}</a>
+    <a class = "other" href="/users/{{_id}}">{{userName}}</a>
     <br>
      {{/each}}
 
@@ -52,6 +52,7 @@
    <br>
    <br>
    <h1>Update Info</h1>
+   <br>
    {{#if error}}
   {{etext}}
   {{/if}}
@@ -171,8 +172,6 @@
   </form>
 
   <br>
-  <br>
-  <h2>This is to delete yourself</h2>
    <form action="/users/{{user._id}}?_method=DELETE" method="post">
   <input type="hidden" name="_method" value="DELETE">
   <button type="submit">Delete account</button>

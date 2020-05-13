@@ -4,10 +4,10 @@ Final project for Web Programming 1
 ```
 TODO: 
 
-Check all posting/replying routes to make sure user is loggged in
-Hide any html elements that shouldn't appear to non-users
+Double check all routes/permissions
+Validate HTML and run tota11y tests
 
-Improve site design and all CSS; add bootstrap if we have time
+Improve CSS/Bootstrap?
 
 Custom images?
 

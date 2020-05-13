@@ -45,11 +45,11 @@ form {
 
 .post {
     outline: 5px solid black;
-    margin-right: 80%;
+    margin-right: 60%;
 }
 
 .picture{
-    max-width:15%; 
+    max-width:30%; 
     height:auto; 
 }
 
@@ -58,10 +58,13 @@ form {
     font-size: 90%;
 }
 
+.other {
+    margin-left: 4%;
+}
+
 a {
 	color: fuchsia;
-	text-decoration: none;
-	
+    text-decoration: none;
 }
 
 a:hover {
