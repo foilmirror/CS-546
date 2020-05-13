@@ -4,8 +4,6 @@ Final project for Web Programming 1
 ```
 TODO: 
 
-Double check all routes/permissions
-
 Improve CSS/Bootstrap?
 
 Custom images?

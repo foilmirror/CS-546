@@ -13,8 +13,9 @@ h1 {
 h2 {
     color: rgb(59, 31, 216);
     font-size: 24px;
+    margin-top: 10px;
     margin-bottom: 5px;
-    margin-left: 3%;
+    margin-left: 1.5%;
 }
 
 h3,
