@@ -19,6 +19,7 @@
      {{/each}}
 
   {{#if nyou}}
+  <aside>
   <form action="/users/{{user._id}}?_method=PUT" method="post">
   <input type="hidden" name="_method" value="PUT">
   <input type="hidden" id="userName" name="userName" value= {{user.userName}} ><br><br>
@@ -29,7 +30,10 @@
   <input type="hidden" id="State" name="State" value= {{user.State}} ><br><br>
   <input type="hidden" id="Password" name="Password" value= {{user.Password}} ><br><br>
   <input type="hidden" id="Age" name="Age" value= {{user.Age}} ><br><br>
-  <input type = "hidden" name = "friends" value = {{i._id}} />
+  <input type = "hidden" name = "friends" value = {{i._id}} /><br><br>
+  </aside>
+  <br><br>
+  <p> Click the button below to add this person</p>
   <button type="submit">Add</button>
   </form>
   {{/if}}

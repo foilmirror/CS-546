@@ -14,6 +14,7 @@ const main = async () => {
     const firstUser = await userData.addUser("firstUser","Email1","dog","Male","City","NJ","22",h);
     const secondUser = await userData.addUser("secondUser","Email2","dog","Male","City","NJ","22",h);
     const addFriend = await userData.addFriendtoUser(firstUser._id, secondUser._id);
+    const addFriend2 = await userData.addFriendtoUser(secondUser._id, firstUser._id);
     const firstPost = await postData.addPost("firstPost title", "firstPost body", "tag", firstUser._id, "dog");
     const secondPost = await postData.addPost("secondPost title", "secondPost body", "tag", secondUser._id, "dog");
     const firstReply = await replyData.addReply(firstPost._id,secondUser._id,"firstReply");

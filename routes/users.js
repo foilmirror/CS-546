@@ -4,6 +4,7 @@ const data = require('../data');
 const userData = data.users;
 const PostData = data.posts;
 const bcrypt = require('bcrypt');
+const xss = require('xss');
 const saltRounds = 10;
 
 router.get('/new', async (req, res) => {
@@ -114,12 +115,12 @@ router.post("/login", async (req, res) => {
           }
           else{
               res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid Password" });
-              console.log("You messed up bro");
+              
           }
       }
       else{
           res.status(401).render('users/login', {title: 'Login', error: true, etext: "Invalid username" });
-          console.log("You messed up bro");
+         
       }
   }
   catch{
@@ -277,7 +278,6 @@ router.put('/:id', async (req, res) => {
 
   userInfo.Email = userInfo.Email.toLowerCase();
   let em = users.find(u => u.Email.toLowerCase() == userInfo.Email);
-  console.log(em);
   if(em){
   if(em._id != req.params.id){
     res.render('users/user', {user: c_user, nyou: diff, amigos: amigos, posts: posta, i: req.session.user, friend: f, you:you, error:true, etext: "email taken"});
@@ -330,7 +330,7 @@ router.put('/:id', async (req, res) => {
       await userData.updateUser(req.session.user._id, req.session.user);
       await userData.addFriendtoUser(req.params.id,userInfo.friends);
       await userData.updateUser(req.params.id, userInfo);
-      res.redirect('/users/' + req.params.id)
+      res.redirect('/users/' + req.params.id);
     }
     const updatedUser = await userData.updateUser(req.params.id, userInfo);
     res.redirect('/users/' + req.params.id);
@@ -341,7 +341,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    await userData.getUserById(req.params.id);
+    await userData.getUserById(xss(req.params.id));
   } catch (e) {
     res.status(404).json({error: 'User not found'});
     return;
