@@ -1,14 +1,13 @@
 ### CS-546 Bulletin Board Website
-Final project for Web Programming 1
 
-```
-TODO: 
+**HOW TO RUN WEBSITE:**
 
-Improve CSS/Bootstrap?
+1. Clone repository or download all files
+2. In the project directory, run `npm install`
+3. Then `npm run seed`
+4. Finally `npm start`
+5. Navigate to http://localhost:3000/ using a web browser
 
-Custom images?
-
-```
 
 **Group members:**
 Spencer Jonas, Jiaqi Li, Paul Chua, Zhi Chen
