@@ -32,9 +32,11 @@ router.get('/:id', async (req, res) => {
       tags: false,
       images: false,
       replies: false,
-      author: false
+      author: false,
+      login: false
     };
     if(req.session.user) {
+      check.login = true;
       check.author = (post.userid == req.session.user._id);
     }
     check.tags = (post.tags[0] != "");
