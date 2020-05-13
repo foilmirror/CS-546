@@ -1,7 +1,7 @@
 header{
     outline: 5px dashed rgb(133, 161, 250);
     background: rgb(133, 184, 241);
-    color: rgb(59, 31, 216);
+    color: rgb(49, 24, 189);
     text-align: right;
     padding: 10px;
 }
@@ -13,16 +13,16 @@ body {
 }
 
 h1 {
-    color: rgb(59, 31, 216);
     font-size: 28px;
     margin-bottom: 5px;
 }
 
 h2 {
-    color: rgb(148, 86, 86);
+    color: rgb(59, 31, 216);
     font-size: 24px;
+    margin-top: 10px;
     margin-bottom: 5px;
-    margin-left: 3%;
+    margin-left: 1.5%;
 }
 
 h3,
@@ -69,8 +69,12 @@ form {
     margin-left: 4%;
 }
 
+.list-end {
+    margin-bottom: 20px;
+}
+
 a {
-	color: fuchsia;
+	color: rgb(99, 7, 99);
     text-decoration: none;
 }
 
