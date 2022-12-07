@@ -20,7 +20,7 @@
   "homepage": "https://github.com/foilmirror/CS-546#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
